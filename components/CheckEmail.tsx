@@ -48,7 +48,7 @@ export default function CheckEmail({ path }: { path: string }) {
       </View>
 
       <View style={styles.helpContainer}>
-        <TouchableOpacity style={styles.helpLink}>
+        <TouchableOpacity>
           <TextInput
               style={styles.helpLinkText}
               lightColor={Colors.light.tint}
@@ -126,5 +126,8 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+    width: 250,
+    borderColor: 'black',
+    borderBottomWidth: 1.5,
   },
 });
