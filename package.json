@@ -3,6 +3,7 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
+    "build-android": "expo build:android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
@@ -19,6 +20,7 @@
     "@react-navigation/bottom-tabs": "^5.8.0",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "@types/sha1": "^1.1.2",
     "expo": "~39.0.2",
     "expo-asset": "~8.2.0",
     "expo-constants": "~9.2.0",
@@ -33,7 +35,8 @@
     "react-native-gesture-handler": "~1.8.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.14.0",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "@babel/core": "~7.12.3",
