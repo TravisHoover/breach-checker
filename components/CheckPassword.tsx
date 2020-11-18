@@ -4,7 +4,7 @@ import sha1 from 'sha1';
 import Colors from '../constants/Colors';
 import { Text, TextInput, View } from './Themed';
 
-export default function CheckPassword({ path }: { path: string }) {
+export default function CheckPassword() {
   const [password, setPassword] = useState('');
   const [results, setResults] = useState('');
 
@@ -13,23 +13,23 @@ export default function CheckPassword({ path }: { path: string }) {
       return;
     }
     const hashedPassword: string = sha1(password);
-    const results = () => fetch(
-        `https://api.pwnedpasswords.com/range/${hashedPassword.slice(0,5)}`
-    ).then(response => response.text())
-        // @ts-ignore
-        .then(data => setResults(data))
-        .catch(error => console.log(error));
-
-    let debouncer = setTimeout(() => {
-      results();
-    }, 1500);
-    return () => {
-      clearTimeout(debouncer);
-    }
+    const hashRange: string = hashedPassword.slice(0, 5);
+    const restOfHash: string = hashedPassword.toUpperCase().slice(5);
+    const hashRangeRegEx: RegExp = new RegExp(`${restOfHash}:.*`,"g");
+    fetch(`https://api.pwnedpasswords.com/range/${hashRange}`)
+        .then(response => response.text())
+        .then(data => {
+          const hit = data.match(hashRangeRegEx);
+          if (!hit) {
+            setResults('Not found in known data breaches')
+          } else {
+            const count = hit[0].split(':')[1];
+            setResults(count)
+          }
+        })
+        .catch(error => console.error(error));
   }, [password]);
 
-
-  const re1 = new RegExp(`${sha1(password).toUpperCase()}:.`,"g");
   return (
       <View>
         <View style={styles.getStartedContainer}>
@@ -57,8 +57,9 @@ export default function CheckPassword({ path }: { path: string }) {
           <Text
               style={styles.getStartedText}
               lightColor="rgba(0,0,0,0.8)"
-              darkColor="rgba(255,255,255,0.8)">
-            {results ? results.match(re1) : null}
+              darkColor="rgba(255,255,255,0.8)"
+          >
+            {results}
           </Text>
         </View>
       </View>
