@@ -8,8 +8,15 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "publish": "expo publish",
+    "lint": "ts-standard --fix",
     "test": "jest --watchAll",
     "ci-test": "jest --ci"
+  },
+  "standard": {
+    "env": [
+      "jest",
+      "react-native"
+    ]
   },
   "jest": {
     "preset": "jest-expo"
@@ -44,6 +51,7 @@
     "@types/react-native": "~0.63.35",
     "jest-expo": "~39.0.0",
     "react-test-renderer": "^17.0.1",
+    "ts-standard": "^9.0.0",
     "typescript": "~4.0.5"
   },
   "private": false

@@ -1,49 +1,53 @@
-import * as React from 'react';
-import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput } from 'react-native';
+import * as React from 'react'
+import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput } from 'react-native'
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors'
+import useColorScheme from '../hooks/useColorScheme'
+import { ReactElement } from 'react'
 
-export function useThemeColor(
-  props: { light?: string; dark?: string },
+export function useThemeColor (
+  props: { light?: string, dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
-) {
-  const theme = useColorScheme();
-  const colorFromProps = props[theme];
+): Object {
+  const theme = useColorScheme()
+  const colorFromProps = props[theme]
 
-  if (colorFromProps) {
-    return colorFromProps;
+  if (colorFromProps) { // eslint-disable-line
+    return colorFromProps
   } else {
-    return Colors[theme][colorName];
+    return Colors[theme][colorName]
   }
 }
 
-type ThemeProps = {
-  lightColor?: string;
-  darkColor?: string;
-};
-
-export type TextProps = ThemeProps & DefaultText['props'];
-export type ViewProps = ThemeProps & DefaultView['props'];
-export type TextInputProps = ThemeProps & DefaultTextInput['props'];
-
-export function Text(props: TextProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
-
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+interface ThemeProps {
+  lightColor?: string
+  darkColor?: string
 }
 
-export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+export type TextProps = ThemeProps & DefaultText['props']
+export type ViewProps = ThemeProps & DefaultView['props']
+export type TextInputProps = ThemeProps & DefaultTextInput['props']
 
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+export function Text (props: TextProps): ReactElement {
+  const { style, lightColor, darkColor, ...otherProps } = props
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+
+  // @ts-expect-error
+  return <DefaultText style={[{ color }, style]} {...otherProps} />
 }
 
-export function TextInput(props: TextInputProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor}, 'text');
+export function View (props: ViewProps): ReactElement {
+  const { style, lightColor, darkColor, ...otherProps } = props
+  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background')
 
-  return <DefaultTextInput style={[{ color }, style]} {...otherProps} />;
+  // @ts-expect-error
+  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />
+}
+
+export function TextInput (props: TextInputProps): ReactElement {
+  const { style, lightColor, darkColor, ...otherProps } = props
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text')
+
+  // @ts-expect-error
+  return <DefaultTextInput style={[{ color }, style]} {...otherProps} />
 }

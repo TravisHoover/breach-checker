@@ -1,29 +1,29 @@
-export type RootStackParamList = {
-  Root: undefined;
-  NotFound: undefined;
-};
+export interface RootStackParamList {
+  Root: undefined
+  NotFound: undefined
+}
 
-export type BottomTabParamList = {
-  Email: undefined;
-  Password: undefined;
-};
+export interface BottomTabParamList {
+  Email: undefined
+  Password: undefined
+}
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
-};
+export interface TabOneParamList {
+  TabOneScreen: undefined
+}
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
-};
+export interface TabTwoParamList {
+  TabTwoScreen: undefined
+}
 
-export type EmailApiResult = {
+export interface EmailApiResult {
   item: {
-    Name: string;
-  },
-};
-
-export type TextInputReturnedText = {
-  nativeEvent: {
-    text: string,
+    Name: string
   }
-};
+}
+
+export interface TextInputReturnedText {
+  nativeEvent: {
+    text: string
+  }
+}
