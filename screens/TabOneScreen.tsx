@@ -7,7 +7,7 @@ import { Text, View } from '../components/Themed';
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Email Address</Text>
+      <Text style={styles.title}>Email Scan</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <CheckEmail path="/screens/TabOneScreen.js" />
     </View>

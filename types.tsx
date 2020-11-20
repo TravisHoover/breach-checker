@@ -4,8 +4,8 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Email: undefined;
+  Password: undefined;
 };
 
 export type TabOneParamList = {
@@ -14,4 +14,14 @@ export type TabOneParamList = {
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
+};
+
+export type EmailApiResult = {
+  Name: string;
+};
+
+export type TextInputReturnedText = {
+  nativeEvent: {
+    text: string,
+  }
 };

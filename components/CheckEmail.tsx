@@ -3,10 +3,11 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import Colors from '../constants/Colors';
 import { Text, TextInput, View } from './Themed';
+import { EmailApiResult, TextInputReturnedText } from '../types';
 
 export default function CheckEmail({ path }: { path: string }) {
   const [emailAddress, setEmailAddress] = useState('');
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     if (!emailAddress) {
@@ -22,7 +23,15 @@ export default function CheckEmail({ path }: { path: string }) {
           })
         }
     )
-        .then(res => res.json())
+        .then(res => {
+          if (res.status === 200) {
+            return res.json()
+          } else {
+           return [{
+             Name: 'Your email is safe!'
+           }];
+          }
+        })
         .then(response => {
           setResults(response);
         })
@@ -52,20 +61,32 @@ export default function CheckEmail({ path }: { path: string }) {
           <TextInput
               style={styles.helpLinkText}
               lightColor={Colors.light.tint}
-              onChangeText={(value: string) => {
-                setEmailAddress(value)
+              darkColor={Colors.dark.tint}
+              onSubmitEditing={(value: TextInputReturnedText) => {
+                setEmailAddress(value.nativeEvent.text)
               }}
+              autoCapitalize={"none"}
+              autoCompleteType={"email"}
+              autoCorrect={false}
+              keyboardType={"email-address"}
+              placeholder={"Email address"}
           />
         </TouchableOpacity>
       </View>
-
       <View>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          {results ? JSON.stringify(results) : null}
-        </Text>
+        {results.map((result: EmailApiResult, index) => {
+          return (
+              <View key={index}>
+                <Text
+                    style={styles.getStartedText}
+                    lightColor="rgba(0,0,0,0.8)"
+                    darkColor="rgba(255,255,255,0.8)"
+                >
+                  {result.Name}
+                </Text>
+              </View>
+          )
+        })}
       </View>
     </View>
   );
