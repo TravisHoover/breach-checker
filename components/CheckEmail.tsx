@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { Text, TextInput, View } from './Themed';
@@ -13,7 +13,7 @@ export default function CheckEmail({ path }: { path: string }) {
     if (!emailAddress) {
       return;
     }
-    const results = () => fetch(
+    fetch(
         `https://haveibeenpwned.com/api/v3/breachedaccount/${emailAddress}`,
         {
           method: "GET",
@@ -36,14 +36,19 @@ export default function CheckEmail({ path }: { path: string }) {
           setResults(response);
         })
         .catch(error => console.log(error));
-
-    let debouncer = setTimeout(() => {
-      results();
-    }, 1500);
-    return () => {
-      clearTimeout(debouncer);
-    }
   }, [emailAddress]);
+
+  const renderItem = ({ item }: EmailApiResult) => (
+      <View style={styles.emailResult}>
+        <Text
+          style={styles.getStartedText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)"
+        >
+          {item.Name}
+        </Text>
+      </View>
+  );
 
   return (
     <View>
@@ -55,7 +60,6 @@ export default function CheckEmail({ path }: { path: string }) {
           Has your email address been compromised? Find out!
         </Text>
       </View>
-
       <View style={styles.helpContainer}>
         <TouchableOpacity>
           <TextInput
@@ -74,63 +78,20 @@ export default function CheckEmail({ path }: { path: string }) {
         </TouchableOpacity>
       </View>
       <View>
-        {results.map((result: EmailApiResult, index) => {
-          return (
-              <View key={index}>
-                <Text
-                    style={styles.getStartedText}
-                    lightColor="rgba(0,0,0,0.8)"
-                    darkColor="rgba(255,255,255,0.8)"
-                >
-                  {result.Name}
-                </Text>
-              </View>
-          )
-        })}
+        <FlatList
+          data={results}
+          renderItem={renderItem}
+          keyExtractor={item => item.Name}
+        />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
   },
   getStartedText: {
     fontSize: 17,
@@ -142,13 +103,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center',
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
   helpLinkText: {
     textAlign: 'center',
     width: 250,
     borderColor: 'black',
     borderBottomWidth: 1.5,
   },
+  emailResult: {
+    marginTop: 15,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+  }
 });

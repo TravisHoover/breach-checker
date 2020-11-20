@@ -17,7 +17,9 @@ export type TabTwoParamList = {
 };
 
 export type EmailApiResult = {
-  Name: string;
+  item: {
+    Name: string;
+  },
 };
 
 export type TextInputReturnedText = {
