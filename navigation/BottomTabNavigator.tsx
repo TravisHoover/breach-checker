@@ -50,12 +50,13 @@ function TabBarIcon (props: { name: string, color: string }): any {
 const TabOneStack = createStackNavigator<TabOneParamList>()
 
 function TabOneNavigator (): any {
+  const colorScheme = useColorScheme()
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name='TabOneScreen'
         component={TabOneScreen}
-        options={{ headerTitle: 'Email Checker' }}
+        options={{ headerTitle: 'Breach Checker', headerStyle: { backgroundColor: Colors[colorScheme].background} }}
       />
     </TabOneStack.Navigator>
   )
@@ -65,12 +66,13 @@ function TabOneNavigator (): any {
 const TabTwoStack = createStackNavigator<TabTwoParamList>()
 
 function TabTwoNavigator (): any {
+  const colorScheme = useColorScheme()
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name='TabTwoScreen'
         component={TabTwoScreen}
-        options={{ headerTitle: 'Password Checker' }}
+        options={{ headerTitle: 'Breach Checker', headerStyle: { backgroundColor: Colors[colorScheme].background} }}
       />
     </TabTwoStack.Navigator>
   )

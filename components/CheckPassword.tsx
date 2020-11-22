@@ -21,10 +21,20 @@ export default function CheckPassword (): ReactElement {
       .then(data => {
         const hit = data.match(hashRangeRegEx)
         if (hit === null) {
-          setResults('Not in any known data breaches')
+          setResults(
+            // @ts-ignore
+            <Text style={{ color: 'green' }}>
+            Not in any known data breaches
+            </Text>
+          )
         } else {
           const count = hit[0].split(':')[1]
-          setResults(count)
+          setResults(
+            // @ts-ignore
+            <Text style={{ color: 'red' }}>
+            This password has been found in {count} breaches!
+            </Text>
+          )
         }
       })
       .catch(error => console.error(error))
@@ -50,6 +60,10 @@ export default function CheckPassword (): ReactElement {
             onChangeText={(value: string) => {
               setPassword(value)
             }}
+            autoCapitalize='none'
+            autoCorrect={false}
+            placeholder='Password'
+            placeholderTextColor='gray'
           />
         </TouchableOpacity>
       </View>
@@ -68,44 +82,9 @@ export default function CheckPassword (): ReactElement {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center'
-  },
-  contentContainer: {
-    paddingTop: 30
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10
-  },
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)'
-  },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4
   },
   resultsText: {
     fontSize: 17,
@@ -123,13 +102,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center'
   },
-  helpLink: {
-    paddingVertical: 15
-  },
   helpLinkText: {
     textAlign: 'center',
     width: 250,
-    borderColor: 'black',
+    borderColor: 'gray',
     borderBottomWidth: 1.5
   }
 })

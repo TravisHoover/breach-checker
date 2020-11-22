@@ -38,7 +38,7 @@ export default function CheckEmail (): ReactElement {
       .catch(error => console.log(error))
   }, [emailAddress])
 
-  const extractBeginningATag = (text: string): string => {
+  const removeATags = (text: string): string => {
     return text.replace(/<a.*?>/g, "").replace(/<\/a>/g, "");
   }
 
@@ -51,18 +51,16 @@ export default function CheckEmail (): ReactElement {
           resizeMode='contain'
         />
         <Text
-          style={styles.getStartedText}
-          lightColor='rgba(0,0,0,0.8)'
-          darkColor='rgba(255,255,255,0.8)'
+          style={styles.resultTitle}
         >
           {item.Name}
         </Text>
       </View>
       <Text
-        style={styles.getStartedText}
+        style={styles.resultText}
         lightColor='rgba(0,0,0,0.8)'
         darkColor='rgba(255,255,255,0.8)'>
-        {extractBeginningATag(item.Description)}
+        {removeATags(item.Description)}
       </Text>
     </View>
   )
@@ -81,7 +79,7 @@ export default function CheckEmail (): ReactElement {
       <View style={styles.helpContainer}>
         <TouchableOpacity>
           <TextInput
-            style={styles.helpLinkText}
+            style={styles.emailEntryText}
             lightColor={Colors.light.tint}
             darkColor={Colors.dark.tint}
             onSubmitEditing={(value: TextInputReturnedText) => {
@@ -92,6 +90,7 @@ export default function CheckEmail (): ReactElement {
             autoCorrect={false}
             keyboardType='email-address'
             placeholder='Email address'
+            placeholderTextColor='gray'
           />
         </TouchableOpacity>
       </View>
@@ -120,10 +119,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center'
   },
-  helpLinkText: {
+  emailEntryText: {
     textAlign: 'center',
     width: 250,
-    borderColor: 'black',
+    borderColor: 'gray',
     borderBottomWidth: 1.5
   },
   emailResult: {
@@ -132,17 +131,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
+    backgroundColor: 'gray',
+    borderRadius: 10
   },
   breachLogo: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
+    marginTop: 5,
     marginRight: 20,
+    backgroundColor: 'gray'
   },
   resultTitle: {
     flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'gray',
+    fontSize: 20
+  },
+  resultText: {
+    fontSize: 16,
+    lineHeight: 24,
+    padding: 10
   }
 })
