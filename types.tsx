@@ -18,6 +18,8 @@ export interface TabTwoParamList {
 
 export interface EmailApiResult {
   item: {
+    LogoPath: string;
+    Description: string;
     Name: string
   }
 }

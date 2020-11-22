@@ -1,11 +1,11 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import {FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native'
 
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
 import { EmailApiResult, TextInputReturnedText } from '../types'
 
-export default function CheckEmail ({ path }: { path: string }): ReactElement {
+export default function CheckEmail (): ReactElement {
   const [emailAddress, setEmailAddress] = useState('')
   const [results, setResults] = useState([])
 
@@ -14,7 +14,7 @@ export default function CheckEmail ({ path }: { path: string }): ReactElement {
       return
     }
     fetch(
-        `https://haveibeenpwned.com/api/v3/breachedaccount/${emailAddress}`,
+        `https://haveibeenpwned.com/api/v3/breachedaccount/${emailAddress}?truncateResponse=false`,
         {
           method: 'GET',
           headers: new Headers({
@@ -38,20 +38,37 @@ export default function CheckEmail ({ path }: { path: string }): ReactElement {
       .catch(error => console.log(error))
   }, [emailAddress])
 
+  const extractBeginningATag = (text: string): string => {
+    return text.replace(/<a.*?>/g, "").replace(/<\/a>/g, "");
+  }
+
   const renderItem = ({ item }: EmailApiResult): ReactElement => (
     <View style={styles.emailResult}>
+      <View style={styles.resultTitle}>
+        <Image
+          style={styles.breachLogo}
+          source={{ uri: item.LogoPath}}
+          resizeMode='contain'
+        />
+        <Text
+          style={styles.getStartedText}
+          lightColor='rgba(0,0,0,0.8)'
+          darkColor='rgba(255,255,255,0.8)'
+        >
+          {item.Name}
+        </Text>
+      </View>
       <Text
         style={styles.getStartedText}
         lightColor='rgba(0,0,0,0.8)'
-        darkColor='rgba(255,255,255,0.8)'
-      >
-        {item.Name}
+        darkColor='rgba(255,255,255,0.8)'>
+        {extractBeginningATag(item.Description)}
       </Text>
     </View>
   )
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.getStartedContainer}>
         <Text
           style={styles.getStartedText}
@@ -78,13 +95,12 @@ export default function CheckEmail ({ path }: { path: string }): ReactElement {
           />
         </TouchableOpacity>
       </View>
-      <View>
-        <FlatList
-          data={results}
-          renderItem={renderItem}
-          keyExtractor={item => item.Name}
-        />
-      </View>
+      <FlatList
+        style={{ marginTop: 30, marginBottom: 5}}
+        data={results}
+        renderItem={renderItem}
+        keyExtractor={item => item.Name}
+      />
     </View>
   )
 }
@@ -115,6 +131,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center',
     alignContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+  },
+  breachLogo: {
+    width: 50,
+    height: 50,
+    marginRight: 20,
+  },
+  resultTitle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center'
   }
 })

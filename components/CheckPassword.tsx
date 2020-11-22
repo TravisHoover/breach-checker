@@ -21,7 +21,7 @@ export default function CheckPassword (): ReactElement {
       .then(data => {
         const hit = data.match(hashRangeRegEx)
         if (hit === null) {
-          setResults('Not found in known data breaches')
+          setResults('Not in any known data breaches')
         } else {
           const count = hit[0].split(':')[1]
           setResults(count)
@@ -56,7 +56,7 @@ export default function CheckPassword (): ReactElement {
 
       <View>
         <Text
-          style={styles.getStartedText}
+          style={styles.resultsText}
           lightColor='rgba(0,0,0,0.8)'
           darkColor='rgba(255,255,255,0.8)'
         >
@@ -106,6 +106,12 @@ const styles = StyleSheet.create({
   codeHighlightContainer: {
     borderRadius: 3,
     paddingHorizontal: 4
+  },
+  resultsText: {
+    fontSize: 17,
+    lineHeight: 24,
+    textAlign: 'center',
+    marginTop: 10,
   },
   getStartedText: {
     fontSize: 17,
