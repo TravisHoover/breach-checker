@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     paddingTop: 60
   },
   title: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold'
   },
   separator: {

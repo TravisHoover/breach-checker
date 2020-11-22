@@ -99,12 +99,14 @@ const styles = StyleSheet.create({
   },
   helpContainer: {
     marginTop: 15,
+    marginBottom: 20,
     marginHorizontal: 20,
     alignItems: 'center'
   },
   helpLinkText: {
     textAlign: 'center',
     width: 250,
+    height: 60,
     borderColor: 'gray',
     borderBottomWidth: 1.5
   }

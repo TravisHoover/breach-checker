@@ -1,13 +1,16 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import {FlatList, Image, Linking, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native'
+import ViewMoreText from 'react-native-view-more-text';
 
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
 import { EmailApiResult, TextInputReturnedText } from '../types'
+import useColorScheme from "../hooks/useColorScheme";
 
 export default function CheckEmail (): ReactElement {
   const [emailAddress, setEmailAddress] = useState('')
   const [results, setResults] = useState([])
+  const colorScheme = useColorScheme()
 
   useEffect(() => {
     if (emailAddress === '') {
@@ -42,30 +45,48 @@ export default function CheckEmail (): ReactElement {
     return text.replace(/<a.*?>/g, "").replace(/<\/a>/g, "");
   }
 
+  const renderViewMore = (onPress: any) => {
+    return(
+      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View more</Text>
+    )
+  }
+  const renderViewLess = (onPress: any) => {
+    return(
+      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View less</Text>
+    )
+  }
+
   const renderItem = ({ item }: EmailApiResult): ReactElement => (
-    <View style={styles.emailResult}>
-      <View style={styles.resultTitle}>
+    <View style={{ ...styles.emailResult, backgroundColor: Colors[colorScheme].resultTile }}>
+      <View style={{ ...styles.resultTitle, backgroundColor: Colors[colorScheme].resultTile }}>
         <TouchableHighlight onPress={() => Linking.openURL(`http://${item.Domain}`)} >
           <Image
-            style={styles.breachLogo}
+            style={{ ...styles.breachLogo, backgroundColor: Colors[colorScheme].resultTile }}
             source={{ uri: item.LogoPath}}
             resizeMode='contain'
           />
         </TouchableHighlight>
         <Text
-          style={styles.resultTitle}
+          style={{ ...styles.resultTitle, backgroundColor: Colors[colorScheme].resultTile }}
           onPress={() => Linking.openURL(`http://${item.Domain}`)}
         >
           {item.Name}
         </Text>
       </View>
-      <Text
-        style={styles.resultText}
-        lightColor='rgba(0,0,0,0.8)'
-        darkColor='rgba(255,255,255,0.8)'
+      <ViewMoreText
+        numberOfLines={3}
+        renderViewMore={renderViewMore}
+        renderViewLess={renderViewLess}
+        textStyle={styles.resultText}
       >
-        {removeATags(item.Description)}
-      </Text>
+        <Text
+          style={styles.resultText}
+          lightColor='rgba(0,0,0,0.8)'
+          darkColor='rgba(255,255,255,0.8)'
+        >
+          {removeATags(item.Description)}
+        </Text>
+      </ViewMoreText>
     </View>
   )
 
@@ -95,6 +116,7 @@ export default function CheckEmail (): ReactElement {
             keyboardType='email-address'
             placeholder='Email address'
             placeholderTextColor='gray'
+
           />
         </TouchableOpacity>
       </View>
@@ -127,7 +149,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 250,
     borderColor: 'gray',
-    borderBottomWidth: 1.5
+    borderBottomWidth: 1.5,
+    height: 60
   },
   emailResult: {
     marginTop: 15,
@@ -135,7 +158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
-    backgroundColor: 'gray',
     borderRadius: 10
   },
   breachLogo: {
@@ -158,5 +180,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     padding: 10
+  },
+  link: {
+    backgroundColor: 'gray',
+    color: 'blue',
+    textDecorationColor: 'blue',
+    textDecorationLine: 'underline'
   }
 })

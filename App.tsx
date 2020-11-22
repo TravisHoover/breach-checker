@@ -3,20 +3,19 @@ import React, { ReactElement } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import useCachedResources from './hooks/useCachedResources'
-// import useColorScheme from './hooks/useColorScheme'
+import useColorScheme from './hooks/useColorScheme'
 import Navigation from './navigation'
 
 export default function App (): ReactElement | null {
   const isLoadingComplete = useCachedResources()
-  // TODO add ability to toggle OR style light scheme
-  // const colorScheme = useColorScheme()
+  const colorScheme = useColorScheme()
 
   if (!isLoadingComplete) {
     return null
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={'dark'} />
+        <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </SafeAreaProvider>
     )
