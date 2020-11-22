@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import {FlatList, Image, StyleSheet, TouchableOpacity} from 'react-native'
+import {FlatList, Image, Linking, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native'
 
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
@@ -45,13 +45,16 @@ export default function CheckEmail (): ReactElement {
   const renderItem = ({ item }: EmailApiResult): ReactElement => (
     <View style={styles.emailResult}>
       <View style={styles.resultTitle}>
-        <Image
-          style={styles.breachLogo}
-          source={{ uri: item.LogoPath}}
-          resizeMode='contain'
-        />
+        <TouchableHighlight onPress={() => Linking.openURL(`http://${item.Domain}`)} >
+          <Image
+            style={styles.breachLogo}
+            source={{ uri: item.LogoPath}}
+            resizeMode='contain'
+          />
+        </TouchableHighlight>
         <Text
           style={styles.resultTitle}
+          onPress={() => Linking.openURL(`http://${item.Domain}`)}
         >
           {item.Name}
         </Text>
@@ -59,7 +62,8 @@ export default function CheckEmail (): ReactElement {
       <Text
         style={styles.resultText}
         lightColor='rgba(0,0,0,0.8)'
-        darkColor='rgba(255,255,255,0.8)'>
+        darkColor='rgba(255,255,255,0.8)'
+      >
         {removeATags(item.Description)}
       </Text>
     </View>

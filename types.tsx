@@ -18,6 +18,7 @@ export interface TabTwoParamList {
 
 export interface EmailApiResult {
   item: {
+    Domain: string;
     LogoPath: string;
     Description: string;
     Name: string
