@@ -1,7 +1,8 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import {FlatList, Image, Linking, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native'
 import ViewMoreText from 'react-native-view-more-text';
-
+import { AdMobBanner} from "expo-ads-admob";
+import Constants from 'expo-constants';
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
 import { EmailApiResult, TextInputReturnedText } from '../types'
@@ -11,6 +12,10 @@ export default function CheckEmail (): ReactElement {
   const [emailAddress, setEmailAddress] = useState('')
   const [results, setResults] = useState([])
   const colorScheme = useColorScheme()
+  const testID = 'ca-app-pub-3940256099942544/6300978111';
+  const productionId = 'ca-app-pub-3756584357781172/6027051832';
+  // Is a real device and running in production.
+  const adUnitID = Constants.isDevice && !__DEV__ ? productionId : testID;
 
   useEffect(() => {
     if (emailAddress === '') {
@@ -126,6 +131,12 @@ export default function CheckEmail (): ReactElement {
         renderItem={renderItem}
         keyExtractor={item => item.Name}
       />
+      <View style={{ alignSelf: 'center'}}>
+        <AdMobBanner
+          bannerSize="banner"
+          adUnitID={adUnitID}
+          servePersonalizedAds />
+      </View>
     </View>
   )
 }

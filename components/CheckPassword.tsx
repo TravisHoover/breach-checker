@@ -3,10 +3,16 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import sha1 from 'sha1'
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
+import { AdMobBanner} from "expo-ads-admob";
+import Constants from 'expo-constants';
 
 export default function CheckPassword (): ReactElement {
   const [password, setPassword] = useState('')
   const [results, setResults] = useState('')
+  const testID = 'ca-app-pub-3940256099942544/6300978111';
+  const productionId = 'ca-app-pub-3756584357781172/6027051832';
+  // Is a real device and running in production.
+  const adUnitID = Constants.isDevice && !__DEV__ ? productionId : testID;
 
   useEffect(() => {
     if (password === '') {
@@ -41,7 +47,7 @@ export default function CheckPassword (): ReactElement {
   }, [password])
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.getStartedContainer}>
         <Text
           style={styles.getStartedText}
@@ -76,6 +82,12 @@ export default function CheckPassword (): ReactElement {
         >
           {results}
         </Text>
+      </View>
+      <View style={{ alignSelf: 'center', marginTop: 250}}>
+        <AdMobBanner
+          bannerSize="smartBannerPortrait"
+          adUnitID={adUnitID}
+          servePersonalizedAds />
       </View>
     </View>
   )
