@@ -27,10 +27,11 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.travishoover.breachchecker",
-      "versionCode": 2,
+      "versionCode": 3,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-3756584357781172~1157868539"
-      }
+      },
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
