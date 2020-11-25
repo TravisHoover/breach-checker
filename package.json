@@ -48,7 +48,7 @@
     "expo-ads-admob": "~8.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.9",
     "@types/react": "~17.0.0",
     "@types/react-native": "^0.63.36",
     "jest-expo": "~39.0.0",
