@@ -10,6 +10,7 @@
     "publish": "expo publish",
     "lint": "ts-standard --fix",
     "test": "jest --watchAll",
+    "coverage": "jest --coverage",
     "ci-test": "jest --ci"
   },
   "standard": {
