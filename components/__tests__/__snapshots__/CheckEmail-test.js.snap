@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+      },
+      Object {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "alignItems": "center",
+          "marginHorizontal": 50,
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "rgba(0,0,0,0.8)",
+          },
+          Object {
+            "fontSize": 17,
+            "lineHeight": 24,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Has your email address been compromised? Find out!
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "alignItems": "center",
+          "marginHorizontal": 20,
+          "marginTop": 15,
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        autoCorrect={false}
+        keyboardType="email-address"
+        onSubmitEditing={[Function]}
+        placeholder="Email address"
+        placeholderTextColor="gray"
+        rejectResponderTermination={true}
+        style={
+          Array [
+            Object {
+              "color": "#2f95dc",
+            },
+            Object {
+              "borderBottomWidth": 1.5,
+              "borderColor": "gray",
+              "height": 60,
+              "textAlign": "center",
+              "width": 250,
+            },
+          ]
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+  </View>
+  <RCTScrollView
+    data={Array []}
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Object {
+        "marginBottom": 5,
+        "marginTop": 30,
+      }
+    }
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View />
+  </RCTScrollView>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "alignSelf": "center",
+        },
+      ]
+    }
+  >
+    <View>
+      <ViewManagerAdapter_ExpoAdsAdMobBannerView
+        proxiedProperties={
+          Object {
+            "adUnitID": "ca-app-pub-3940256099942544/6300978111",
+            "additionalRequestParams": Object {},
+            "bannerSize": "banner",
+            "onAdViewDidDismissScreen": undefined,
+            "onAdViewDidReceiveAd": undefined,
+            "onAdViewWillDismissScreen": undefined,
+            "onAdViewWillLeaveApplication": undefined,
+            "onAdViewWillPresentScreen": undefined,
+            "onDidFailToReceiveAdWithError": [Function],
+            "onSizeChange": [Function],
+          }
+        }
+        style={Object {}}
+      />
+    </View>
+  </View>
+</View>
+`;
