@@ -7,6 +7,7 @@ import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import TabOneScreen from '../screens/TabOneScreen'
 import TabTwoScreen from '../screens/TabTwoScreen'
+import TabThreeScreen from '../screens/TabThreeScreen'
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types'
 
 // @ts-ignore
@@ -32,6 +33,13 @@ export default function BottomTabNavigator (): any {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <MaterialTabBarIcon name='textbox-password' color={color} />
+        }}
+      />
+      <BottomTab.Screen
+        name='Breaches'
+        component={TabThreeNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <MaterialTabBarIcon name='shield-search' color={color} />
         }}
       />
     </BottomTab.Navigator>
@@ -73,5 +81,21 @@ function TabTwoNavigator (): any {
         options={{ headerTitle: 'Breach Checker', headerStyle: { backgroundColor: Colors[colorScheme].background} }}
       />
     </TabTwoStack.Navigator>
+  )
+}
+
+// @ts-ignore
+const TabThreeStack = createStackNavigator<TabThreeParamList>()
+
+function TabThreeNavigator (): any {
+  const colorScheme = useColorScheme()
+  return (
+    <TabThreeStack.Navigator>
+      <TabThreeStack.Screen
+        name='TabThreeScreen'
+        component={TabThreeScreen}
+        options={{ headerTitle: 'Breach Checker', headerStyle: { backgroundColor: Colors[colorScheme].background} }}
+      />
+    </TabThreeStack.Navigator>
   )
 }
