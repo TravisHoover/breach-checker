@@ -6,6 +6,7 @@ export interface RootStackParamList {
 export interface BottomTabParamList {
   Email: undefined
   Password: undefined
+  Breaches: undefined
 }
 
 export interface TabOneParamList {

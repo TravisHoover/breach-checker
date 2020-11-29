@@ -15,6 +15,12 @@ export default {
             screens: {
               TabTwoScreen: 'two'
             }
+          },
+
+          TabThree: {
+            screens: {
+              TabThreeScreen: 'three'
+            }
           }
         }
       },
