@@ -16,25 +16,16 @@ export default function Breaches (): ReactElement {
   // Is a real device and running in production.
   const adUnitID = Constants.isDevice && !__DEV__ ? productionId : testID;
 
-  useEffect(() => {
-    fetch(
+  // @ts-ignore
+  useEffect(async () => {
+    const reply = await fetch(
       `https://haveibeenpwned.com/api/v3/breaches`,
       {
         method: 'GET',
-        headers: new Headers({
-          Accept: 'application/json',
-          'hibp-api-key': 'dd439240c4e94b429eb478e497897c64'
-        })
       }
     )
-      .then(res => {
-        console.log('res', res);
-        return res.json()
-      })
-      .then(response => {
-        setResults(response)
-      })
-      .catch(error => console.log(error))
+    const parsedReply = await reply.json();
+    setResults(parsedReply);
   }, [])
 
   const removeATags = (text: string): string => {
