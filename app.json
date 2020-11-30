@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.travishoover.breachchecker",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
