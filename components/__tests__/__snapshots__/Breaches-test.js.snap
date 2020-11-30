@@ -40,7 +40,7 @@ exports[`renders correctly 1`] = `
         ]
       }
     >
-      Has your email address been compromised? Find out!
+      Search breached web sites:
     </Text>
   </View>
   <View
@@ -80,7 +80,7 @@ exports[`renders correctly 1`] = `
         autoCorrect={false}
         keyboardType="email-address"
         onSubmitEditing={[Function]}
-        placeholder="Email address"
+        placeholder="domain"
         placeholderTextColor="gray"
         rejectResponderTermination={true}
         style={
