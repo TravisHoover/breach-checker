@@ -1,11 +1,12 @@
 import React, { useState, useEffect, ReactElement } from 'react'
 import {FlatList, Image, Linking, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native'
-import ViewMoreText from 'react-native-view-more-text';
 import { AdMobBanner} from "expo-ads-admob";
 import Constants from 'expo-constants';
 import Colors from '../constants/Colors'
 import { Text, TextInput, View } from './Themed'
-import { EmailApiResult, TextInputReturnedText } from '../types'
+import {EmailApiResult, TextInputReturnedText} from '../types'
+import ViewMoreText from "react-native-view-more-text";
+import {removeATags, renderViewLess, renderViewMore} from "../utils/format";
 import useColorScheme from "../hooks/useColorScheme";
 
 export default function CheckEmail (): ReactElement {
@@ -45,21 +46,6 @@ export default function CheckEmail (): ReactElement {
       })
       .catch(error => console.log(error))
   }, [emailAddress])
-
-  const removeATags = (text: string): string => {
-    return text.replace(/<a.*?>/g, "").replace(/<\/a>/g, "");
-  }
-
-  const renderViewMore = (onPress: any) => {
-    return(
-      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View more</Text>
-    )
-  }
-  const renderViewLess = (onPress: any) => {
-    return(
-      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View less</Text>
-    )
-  }
 
   const renderItem = ({ item }: EmailApiResult): ReactElement => (
     <View style={{ ...styles.emailResult, backgroundColor: Colors[colorScheme].resultTile }}>
