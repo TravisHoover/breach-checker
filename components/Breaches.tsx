@@ -80,7 +80,7 @@ export default function Breaches (): ReactElement {
           lightColor='rgba(0,0,0,0.8)'
           darkColor='rgba(255,255,255,0.8)'
         >
-          Has your email address been compromised? Find out!
+          Search breached web sites:
         </Text>
       </View>
       <View style={styles.helpContainer}>
@@ -96,7 +96,7 @@ export default function Breaches (): ReactElement {
             autoCompleteType='email'
             autoCorrect={false}
             keyboardType='email-address'
-            placeholder='Email address'
+            placeholder='domain'
             placeholderTextColor='gray'
 
           />
