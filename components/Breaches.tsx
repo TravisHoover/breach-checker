@@ -1,15 +1,17 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import {FlatList, Image, Linking, StyleSheet, TouchableHighlight} from 'react-native'
-import ViewMoreText from 'react-native-view-more-text';
+import {FlatList, Image, Linking, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native'
 import { AdMobBanner} from "expo-ads-admob";
 import Constants from 'expo-constants';
 import Colors from '../constants/Colors'
-import { Text, View } from './Themed'
-import { EmailApiResult } from '../types'
+import {Text, TextInput, View} from './Themed'
+import {EmailApiResult, TextInputReturnedText} from '../types'
 import useColorScheme from "../hooks/useColorScheme";
+import ViewMoreText from "react-native-view-more-text";
+import {removeATags, renderViewLess, renderViewMore} from "../utils/format";
 
 export default function Breaches (): ReactElement {
-  const [results, setResults] = useState([])
+  const [domains, setDomains] = useState([])
+  const [searched, setSearched] = useState('')
   const colorScheme = useColorScheme()
   const testID = 'ca-app-pub-3940256099942544/6300978111';
   const productionId = 'ca-app-pub-3756584357781172/6027051832';
@@ -17,31 +19,24 @@ export default function Breaches (): ReactElement {
   const adUnitID = Constants.isDevice && !__DEV__ ? productionId : testID;
 
   // @ts-ignore
-  useEffect(async () => {
-    const reply = await fetch(
-      `https://haveibeenpwned.com/api/v3/breaches`,
-      {
-        method: 'GET',
+  useEffect(() => {
+    async function fetchData() {
+      let url = `https://haveibeenpwned.com/api/v3/breaches`
+      if (searched !== '') {
+        url += `?domain=${searched}`;
       }
-    )
-    const parsedReply = await reply.json();
-    setResults(parsedReply);
-  }, [])
-
-  const removeATags = (text: string): string => {
-    return text.replace(/<a.*?>/g, "").replace(/<\/a>/g, "");
-  }
-
-  const renderViewMore = (onPress: any) => {
-    return(
-      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View more</Text>
-    )
-  }
-  const renderViewLess = (onPress: any) => {
-    return(
-      <Text style={{ textAlign: 'center', color: 'darkblue' }} onPress={onPress}>View less</Text>
-    )
-  }
+      console.log('url', url);
+      const reply = await fetch(
+        url,
+        {
+          method: 'GET',
+        }
+      )
+      const parsedReply = await reply.json();
+      setDomains(parsedReply);
+    }
+    fetchData();
+  }, [searched])
 
   const renderItem = ({ item }: EmailApiResult): ReactElement => (
     <View style={{ ...styles.emailResult, backgroundColor: Colors[colorScheme].resultTile }}>
@@ -79,9 +74,37 @@ export default function Breaches (): ReactElement {
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={styles.getStartedContainer}>
+        <Text
+          style={styles.getStartedText}
+          lightColor='rgba(0,0,0,0.8)'
+          darkColor='rgba(255,255,255,0.8)'
+        >
+          Has your email address been compromised? Find out!
+        </Text>
+      </View>
+      <View style={styles.helpContainer}>
+        <TouchableOpacity>
+          <TextInput
+            style={styles.emailEntryText}
+            lightColor={Colors.light.tint}
+            darkColor={Colors.dark.tint}
+            onSubmitEditing={(value: TextInputReturnedText) => {
+              setSearched(value.nativeEvent.text)
+            }}
+            autoCapitalize='none'
+            autoCompleteType='email'
+            autoCorrect={false}
+            keyboardType='email-address'
+            placeholder='Email address'
+            placeholderTextColor='gray'
+
+          />
+        </TouchableOpacity>
+      </View>
       <FlatList
         style={{ marginTop: 30, marginBottom: 5}}
-        data={results}
+        data={domains}
         renderItem={renderItem}
         keyExtractor={item => item.Name}
       />
