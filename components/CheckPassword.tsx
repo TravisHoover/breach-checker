@@ -74,7 +74,7 @@ export default function CheckPassword (): ReactElement {
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center' }}>
         <Text
           style={styles.resultsText}
           lightColor='rgba(0,0,0,0.8)'
@@ -83,7 +83,11 @@ export default function CheckPassword (): ReactElement {
           {results}
         </Text>
       </View>
-      <View style={{ alignSelf: 'center', marginTop: 250}}>
+      <View>
+        <Text style={{ textAlign: 'center', marginBottom: 75 }}>
+          Breach Checker will never store or transmit passwords.
+          A process called k-anonymity is used to keep your data safe.
+        </Text>
         <AdMobBanner
           bannerSize="smartBannerPortrait"
           adUnitID={adUnitID}

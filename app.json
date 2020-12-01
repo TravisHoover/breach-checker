@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "breach-checker",
+    "name": "Breach Checker",
     "slug": "breach-checker",
     "version": "3.0.0",
     "orientation": "portrait",
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.travishoover.breachchecker",
-      "versionCode": 3,
+      "versionCode": 4,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-3756584357781172~1157868539"
       },

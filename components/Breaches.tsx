@@ -25,7 +25,6 @@ export default function Breaches (): ReactElement {
       if (searched !== '') {
         url += `?domain=${searched}`;
       }
-      console.log('url', url);
       const reply = await fetch(
         url,
         {
