@@ -2,7 +2,7 @@
   "expo": {
     "name": "breach-checker",
     "slug": "breach-checker",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -20,7 +20,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.travishoover.breachchecker",
-      "buildNumber": "1.0.0"
+      "buildNumber": "3.0.0"
     },
     "android": {
       "adaptiveIcon": {
