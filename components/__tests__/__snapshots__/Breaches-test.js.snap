@@ -101,38 +101,41 @@ exports[`renders correctly 1`] = `
       />
     </View>
   </View>
-  <RCTScrollView
-    data={Array []}
-    disableVirtualization={false}
-    getItem={[Function]}
-    getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
-    onLayout={[Function]}
-    onMomentumScrollEnd={[Function]}
-    onScroll={[Function]}
-    onScrollBeginDrag={[Function]}
-    onScrollEndDrag={[Function]}
-    removeClippedSubviews={false}
-    renderItem={[Function]}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+  <View
     style={
-      Object {
-        "marginBottom": 5,
-        "marginTop": 30,
-      }
+      Array [
+        Object {
+          "backgroundColor": "#ffffff",
+        },
+        Object {
+          "alignContent": "center",
+          "alignItems": "center",
+          "alignSelf": "center",
+          "flex": 3,
+          "flexDirection": "row",
+          "fontSize": 60,
+          "justifyContent": "center",
+          "margin": 100,
+        },
+      ]
     }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
   >
-    <View />
-  </RCTScrollView>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000",
+          },
+          Object {
+            "color": "darkgreen",
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      No breaches found.
+    </Text>
+  </View>
   <View
     style={
       Array [
@@ -151,7 +154,7 @@ exports[`renders correctly 1`] = `
           Object {
             "adUnitID": "ca-app-pub-3940256099942544/6300978111",
             "additionalRequestParams": Object {},
-            "bannerSize": "banner",
+            "bannerSize": "smartBannerPortrait",
             "onAdViewDidDismissScreen": undefined,
             "onAdViewDidReceiveAd": undefined,
             "onAdViewWillDismissScreen": undefined,

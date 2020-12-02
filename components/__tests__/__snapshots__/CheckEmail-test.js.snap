@@ -133,37 +133,24 @@ exports[`renders correctly 1`] = `
   >
     <View />
   </RCTScrollView>
-  <View
-    style={
-      Array [
+  <View>
+    <ViewManagerAdapter_ExpoAdsAdMobBannerView
+      proxiedProperties={
         Object {
-          "backgroundColor": "#ffffff",
-        },
-        Object {
-          "alignSelf": "center",
-        },
-      ]
-    }
-  >
-    <View>
-      <ViewManagerAdapter_ExpoAdsAdMobBannerView
-        proxiedProperties={
-          Object {
-            "adUnitID": "ca-app-pub-3940256099942544/6300978111",
-            "additionalRequestParams": Object {},
-            "bannerSize": "banner",
-            "onAdViewDidDismissScreen": undefined,
-            "onAdViewDidReceiveAd": undefined,
-            "onAdViewWillDismissScreen": undefined,
-            "onAdViewWillLeaveApplication": undefined,
-            "onAdViewWillPresentScreen": undefined,
-            "onDidFailToReceiveAdWithError": [Function],
-            "onSizeChange": [Function],
-          }
+          "adUnitID": "ca-app-pub-3940256099942544/6300978111",
+          "additionalRequestParams": Object {},
+          "bannerSize": "smartBannerPortrait",
+          "onAdViewDidDismissScreen": undefined,
+          "onAdViewDidReceiveAd": undefined,
+          "onAdViewWillDismissScreen": undefined,
+          "onAdViewWillLeaveApplication": undefined,
+          "onAdViewWillPresentScreen": undefined,
+          "onDidFailToReceiveAdWithError": [Function],
+          "onSizeChange": [Function],
         }
-        style={Object {}}
-      />
-    </View>
+      }
+      style={Object {}}
+    />
   </View>
 </View>
 `;
