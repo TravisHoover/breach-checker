@@ -36,9 +36,7 @@ export default function CheckEmail (): ReactElement {
         if (res.status === 200) {
           return res.json()
         } else {
-          return [{
-            Name: 'Your email is safe!'
-          }]
+          return null
         }
       })
       .then(response => {
@@ -111,18 +109,26 @@ export default function CheckEmail (): ReactElement {
           />
         </TouchableOpacity>
       </View>
-      <FlatList
-        style={{ marginTop: 30, marginBottom: 5}}
-        data={results}
-        renderItem={renderItem}
-        keyExtractor={item => item.Name}
-      />
-      <View style={{ alignSelf: 'center'}}>
+      {!results && (
+        <View style={{ ...styles.noResultTitle }}>
+          <Text style={{ fontSize: 20, color: 'darkgreen' }}>
+            Your email is safe!
+          </Text>
+        </View>
+      )}
+      {results && (
+        <FlatList
+          style={{ marginTop: 30, marginBottom: 5}}
+          data={results}
+          renderItem={renderItem}
+          keyExtractor={item => item.Name}
+        />
+      )}
+
         <AdMobBanner
-          bannerSize="banner"
+          bannerSize="smartBannerPortrait"
           adUnitID={adUnitID}
           servePersonalizedAds />
-      </View>
     </View>
   )
 }
@@ -172,6 +178,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'gray',
     fontSize: 20
+  },
+  noResultTitle: {
+    margin: 100,
+    flex: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontSize: 60,
   },
   resultText: {
     fontSize: 16,

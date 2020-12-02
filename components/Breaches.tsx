@@ -101,15 +101,24 @@ export default function Breaches (): ReactElement {
           />
         </TouchableOpacity>
       </View>
-      <FlatList
-        style={{ marginTop: 30, marginBottom: 5}}
-        data={domains}
-        renderItem={renderItem}
-        keyExtractor={item => item.Name}
-      />
+      {domains.length > 0 && (
+        <FlatList
+          style={{ marginTop: 30, marginBottom: 5}}
+          data={domains}
+          renderItem={renderItem}
+          keyExtractor={item => item.Name}
+        />
+      )}
+      {domains.length === 0 && (
+        <View style={{ ...styles.noResultTitle }}>
+          <Text style={{ fontSize: 20, color: 'darkgreen' }}>
+            No breaches found.
+          </Text>
+        </View>
+      )}
       <View style={{ alignSelf: 'center'}}>
         <AdMobBanner
-          bannerSize="banner"
+          bannerSize="smartBannerPortrait"
           adUnitID={adUnitID}
           servePersonalizedAds />
       </View>
@@ -162,6 +171,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'gray',
     fontSize: 20
+  },
+  noResultTitle: {
+    margin: 100,
+    flex: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontSize: 60,
   },
   resultText: {
     fontSize: 16,
