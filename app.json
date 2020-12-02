@@ -20,7 +20,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.travishoover.breachchecker",
-      "buildNumber": "3.0.0"
+      "buildNumber": "5.0.0"
     },
     "android": {
       "adaptiveIcon": {
