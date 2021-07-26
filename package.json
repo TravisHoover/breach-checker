@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@types/react": "~17.0.0",
+    "@types/react": "~17.0.15",
     "@types/react-native": "^0.63.37",
     "jest-expo": "~39.0.0",
     "react-test-renderer": "^17.0.1",
